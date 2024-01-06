@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: dmca_backend:latest
+    image: test_backend:latest
     ports:
       - "8092:8000"
     environment:
@@ -21,4 +21,4 @@ services:
       - .:/code # For hotreloading
 
 volumes:
-  dmca_backend:
+  test_backend:
