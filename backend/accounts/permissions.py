@@ -10,7 +10,7 @@ class IsManagerOrReadOnly(BasePermission):
             return True
 
         # Check if the user is authenticated
-        if not request.user or not request.user.is_authenticated:
+        elif not request.user or not request.user.is_authenticated:
             return False
 
         # Check if the user is a manager
