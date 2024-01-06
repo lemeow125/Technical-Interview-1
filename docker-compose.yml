@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  # Django App
+  django_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dmca_backend:latest
+    ports:
+      - "8092:8000"
+    environment:
+      - PYTHONBUFFERED=1
+    command:
+      [
+        "sh",
+        "-c",
+        "python backend/manage.py spectacular --color --file backend/schema.yml && python backend/manage.py collectstatic --noinput && python backend/manage.py makemigrations && python backend/manage.py migrate && python backend/manage.py runserver 127.0.0.1:8000",
+      ]
+    volumes:
+      - .:/code # For hotreloading
+
+volumes:
+  dmca_backend:
