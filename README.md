@@ -14,6 +14,8 @@ A hosted demo of the backend can be found [here](https://testing.keannu1.duckdns
 
 ![Swagger](/documentation/swagger.png)
 
+![Get Players API](/documentation/get-players.png)
+
 ![Admin Panel](/documentation/admin.png)
 
 ![Admin Panel - Logged in](/documentation/admin-logged-in.png)
