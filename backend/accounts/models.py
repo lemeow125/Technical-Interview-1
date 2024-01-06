@@ -19,7 +19,6 @@ class CustomUser(AbstractUser):
         null=True, upload_to='avatars/')
 
     def avatar_url(self):
-        # Assuming your media root is set to 'media/'
         return f'/api/v1/media/avatars/{self.avatar.name}'
 
     @property
@@ -31,7 +30,6 @@ class CustomUser(AbstractUser):
         return reverse('admin:users_customuser_change', args=(self.pk,))
 
     def get_prep_value(self, value):
-        # Get the original filename without the random string
         original_filename = self.avatar.field.storage.name(self.avatar.path)
         return original_filename
     pass
