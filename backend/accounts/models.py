@@ -15,8 +15,8 @@ class CustomUser(AbstractUser):
     # password inherited from base user class
     # is_admin inherited from base user class
 
-    avatar = models.ImageField(
-        null=True, upload_to='avatars/')
+    avatar = ResizedImageField(
+        null=True, force_format="WEBP", quality=100, upload_to='avatars/')
 
     def avatar_url(self):
         return f'/api/v1/media/avatars/{self.avatar.field.storage.name(self.avatar.path)}'
