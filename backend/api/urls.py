@@ -4,7 +4,7 @@ from django.urls import path, include
 from config import settings
 urlpatterns = [
     path('accounts/', include('accounts.urls')),
-
+    path('players/', include('players.urls')),
 ]
 
 # Media files

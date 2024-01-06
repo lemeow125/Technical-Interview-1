@@ -513,6 +513,147 @@ paths:
               schema:
                 $ref: '#/components/schemas/SetUsername'
           description: ''
+  /api/v1/players/:
+    get:
+      operationId: api_v1_players_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Player'
+          description: ''
+    post:
+      operationId: api_v1_players_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Player'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Player'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: ''
+  /api/v1/players/{id}/:
+    get:
+      operationId: api_v1_players_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this player.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: ''
+    put:
+      operationId: api_v1_players_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this player.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Player'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Player'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: ''
+    patch:
+      operationId: api_v1_players_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this player.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPlayer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPlayer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPlayer'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: ''
+    delete:
+      operationId: api_v1_players_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this player.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
 components:
   schemas:
     Activation:
@@ -592,6 +733,99 @@ components:
         last_name:
           type: string
           maxLength: 150
+    PatchedPlayer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        number:
+          type: string
+        full_name:
+          type: string
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 255
+        lastName:
+          type: string
+          maxLength: 255
+        pos:
+          type: string
+          maxLength: 2
+        bat:
+          type: string
+          maxLength: 1
+        thw:
+          type: string
+          maxLength: 1
+        age:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        ht:
+          type: string
+          maxLength: 255
+        wt:
+          type: string
+          maxLength: 255
+        birthPlace:
+          type: string
+          maxLength: 255
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        number:
+          type: string
+        full_name:
+          type: string
+          readOnly: true
+        firstName:
+          type: string
+          maxLength: 255
+        lastName:
+          type: string
+          maxLength: 255
+        pos:
+          type: string
+          maxLength: 2
+        bat:
+          type: string
+          maxLength: 1
+        thw:
+          type: string
+          maxLength: 1
+        age:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        ht:
+          type: string
+          maxLength: 255
+        wt:
+          type: string
+          maxLength: 255
+        birthPlace:
+          type: string
+          maxLength: 255
+      required:
+      - age
+      - bat
+      - birthPlace
+      - firstName
+      - full_name
+      - ht
+      - id
+      - lastName
+      - number
+      - pos
+      - thw
+      - wt
     SendEmailReset:
       type: object
       properties:

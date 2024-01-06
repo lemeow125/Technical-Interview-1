@@ -17,6 +17,7 @@ class CustomUser(AbstractUser):
 
     avatar = ResizedImageField(
         null=True, force_format="WEBP", quality=100, upload_to='avatars/')
+    is_manager = models.BooleanField(default=False)
 
     def avatar_url(self):
         return f'/api/v1/media/avatars/{self.avatar.field.storage.name(self.avatar.path)}'
@@ -45,6 +46,7 @@ def create_superuser(sender, **kwargs):
                 'password': os.getenv('DJANGO_ADMIN_PASSWORD'),
                 'is_staff': True,
                 'is_superuser': True,
+                'is_manager': True,
                 'first_name': 'Super',
                 'last_name': 'Admin'
             },
@@ -55,6 +57,7 @@ def create_superuser(sender, **kwargs):
                 'password': os.getenv('DJANGO_ADMIN_PASSWORD'),
                 'is_staff': False,
                 'is_superuser': False,
+                'is_manager': False,
                 'first_name': "Test",
                 'last_name': "User"
             },
@@ -78,5 +81,6 @@ def create_superuser(sender, **kwargs):
                     print('Created User:', user['username'])
                 USER.first_name = user['first_name']
                 USER.last_name = user['last_name']
+                USER.is_manager = user['is_manager']
                 USER.is_active = True
                 USER.save()
