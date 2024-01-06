@@ -19,7 +19,7 @@ class CustomUser(AbstractUser):
         null=True, upload_to='avatars/')
 
     def avatar_url(self):
-        return f'/api/v1/media/avatars/{self.avatar.name}'
+        return f'/api/v1/media/avatars/{self.avatar.field.storage.name(self.avatar.path)}'
 
     @property
     def full_name(self):
@@ -29,9 +29,6 @@ class CustomUser(AbstractUser):
     def admin_url(self):
         return reverse('admin:users_customuser_change', args=(self.pk,))
 
-    def get_prep_value(self, value):
-        original_filename = self.avatar.field.storage.name(self.avatar.path)
-        return original_filename
     pass
 
 

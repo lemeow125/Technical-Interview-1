@@ -93,7 +93,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = 'api/v1/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
